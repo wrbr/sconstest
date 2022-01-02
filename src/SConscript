@@ -1,0 +1,27 @@
+vars = Variables()
+vars.Add('pname', 'Set package name', 'basetest')
+vars.Add('pversion', 'Set package version', '1.0.0')
+env = Environment(tools=["default", "packaging"], variables = vars)
+Help(vars.GenerateHelpText(env))
+env.Prepend(RPM = 'TAR_OPTIONS="--transform \'s,^src/,,\' --transform \'s,SConscript,SConstruct,\'" ')
+mma = Glob("bin/*")
+env.Install("/var/tmp/", mma)
+env.Tag(mma, CONFIG=' ')
+env.Package(
+    NAME=env['pname'],
+    VERSION=env['pversion'],
+    PACKAGEVERSION=0,
+    #PACKAGEROOT="src",
+    PACKAGETYPE="rpm",
+    LICENSE="gpl",
+    SUMMARY="Check tags",
+    DESCRIPTION="test basics",
+    #X_RPM_BUILDROOT="pack/",
+    X_RPM_GROUP="build/tools",
+    X_RPM_CONFLICTS="sillypkg",
+)
+#print("Var: " + env['PACKAGEROOT'])
+#print (env.Dump())
+#print ("BUILD_TARGETS is", map(str, BUILD_TARGETS))
+#env.VariantDir('pkg', '.')
+env.Clean(mma, env['pname'] + '-' + env['pversion'])
