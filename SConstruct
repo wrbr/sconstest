@@ -1,4 +1,4 @@
-#VariantDir('pkg', 'src')
+SConscriptChdir(1)
 SConscript('src/SConscript')
-#VariantDir('pkg', 'base')
+#VariantDir('pkg', 'src')
 #SConscript('pkg/SConscript')
