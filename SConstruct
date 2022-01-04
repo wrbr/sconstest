@@ -1,4 +1,4 @@
-SConscriptChdir(1)
-SConscript('src/SConscript')
-#VariantDir('pkg', 'src')
-#SConscript('pkg/SConscript')
+env = Environment()
+env.SConscriptChdir(1)
+SConscript('build/SConscript')
+#SConscript('src/SConscript')
