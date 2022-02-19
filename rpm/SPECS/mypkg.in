@@ -1,0 +1,29 @@
+Name:       @NAME@
+Version:    @VERSION@
+Release:    @REL@
+
+%define debug_package %{nil}
+
+Summary:    @SUM@
+License:    GPL
+Source:     @NAME@-@VERSION@.tar.gz
+
+%description
+@DESC@
+
+%prep
+# creates the directory @NAME@-@VERSION@ and unpacks the source tar file 
+%setup -c
+
+%build
+
+%install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT@DEST@
+rsync -va . $RPM_BUILD_ROOT@DEST@/
+
+%files
+%defattr(-,root,root,-)
+@SRCFILES@
+
+%changelog
