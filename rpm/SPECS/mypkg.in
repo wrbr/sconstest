@@ -22,6 +22,10 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT@DEST@
 rsync -va . $RPM_BUILD_ROOT@DEST@/
 
+%clean
+[ $RPM_BUILD_ROOT != "/" ] && rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_DIR
+
 %files
 %defattr(-,root,root,-)
 @SRCFILES@
